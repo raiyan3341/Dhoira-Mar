@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CR ER PU**ki MAR</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Optional: Add a simple transition for a smoother visual effect */
+        .score-count {
+            transition: transform 0.2s ease-in-out;
+        }
+        .backdrop-blur {
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px); /* For Safari support */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="w-[450px] md:w-[1140px] mx-auto h-[700px]  mt-7 border-3 border-green-400">
+
+        <div class="w-[130px] h-[35px] flex gap-1 bg-[#75f84171] rounded-2xl items-center justify-center mt-4 ml-70 md:ml-230">
+            <p class="">Total Score:</p>
+            <p class="score-count text-red-600">0</p>
+        </div>
+
+        <div class="text-center font-bold text-blue-700 text-base m-4 md:text-xl">
+            <h1>সম্মানিত ছাত্রবীন্দু, আমাদের section CR এর জন্য আমরা কিছু সম্মান প্রদর্শন করতে চাই:</h1>
+        </div>
+
+        <div>
+        <h1 class="text-center font-bold text-green-800 text-sm m-4 md:text-xl"> নিচে সার্কেল অপশনে click/Tap করে করে আমরা তাকে সম্মান প্রদর্শন করতে চাই:</h1>
+       </div>
+
+
+       <div class="relative">
+    <img id="main-image" class="w-[190px] h-[200px] ml-34 md:w-[300px] md:h-[250px] md:ml-96" src="WhatsApp Image 2025-09-10 at 22.00.39_b8ddfa7d.jpg" alt="">
+    <div id="sticker-container" class="absolute inset-0 pointer-events-none"></div>
+</div>
+
+       <div class="flex gap-1 items-center ml-28 rounded-xl w-60 h-8 text-base mt-4 md:ml-101 bg-blue-200">
+        <p class="text-black font-bold ml-8">CR কে জুতা মারা হচ্ছে: <span class="score-count text-red-600">0</span> </p>
+       </div>
+
+       <div id="mair-icon" class="w-35 h-35 ml-38 mt-5 border border-green-500 shadow-2xl rounded-full bg-green-200 cursor-pointer hover:bg-green-300 active:scale-95 md:ml-115 ">
+        <p class="text-center text-cyan-800 font-bold mt-9 justify-center"> এক দুই তিন চার...<br> CR রে <span class="text-red-700">জুতা </span> মার Tap/Click</p>
+
+       </div>
+
+       <div>
+        <button class="w-40 h-8 rounded-xl bg-green-500 shadow-2xl ml-35 mt-5 md:ml-110">DONE</button>
+       </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -42,13 +42,13 @@ function createShoeSticker() {
     const shoeSticker = document.createElement("img");
     shoeSticker.src = "juta.png"; // Replace 'juta.png' with the actual path to your shoe sticker image
     shoeSticker.className = "absolute transition-all duration-300 ease-out transform";
-    shoeSticker.style.width = "80px";
+    shoeSticker.style.width = "100px";
     shoeSticker.style.height = "auto";
     shoeSticker.style.opacity = "0";
 
     // Set the sticker's initial position and rotation to the center
-    shoeSticker.style.left = `calc(50% - 20px)`; // 20px is half the width of the sticker
-    shoeSticker.style.top = `calc(50% - 20px)`; // 20px is half the height of the sticker
+    shoeSticker.style.left = `calc(47% - 20px)`; // 20px is half the width of the sticker
+    shoeSticker.style.top = `calc(45% - 20px)`; // 20px is half the height of the sticker
     shoeSticker.style.transform = `scale(0.5) rotate(0deg)`;
 
     // Append to the container

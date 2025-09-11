@@ -1,112 +1,109 @@
-let mairIcon = document.getElementById("mair-icon");
-let mainImage = document.getElementById("main-image");
-let stickerContainer = document.getElementById("sticker-container");
-let scoreElements = document.querySelectorAll(".score-count");
-let doneButton = document.querySelector("button");
+// ----- Login -----
+const loginPage = document.getElementById("login-page");
+const gamePage = document.getElementById("game-page");
+const loginBtn = document.getElementById("login-btn");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const loginError = document.getElementById("login-error");
+const playerName = document.getElementById("player-name");
 
-// Keep track of the current sticker count
-let stickerCount = 0;
+const correctPassword = "1122";
 
-// Create the modal HTML and add it to the body
-const modalHTML = `
-    <div id="modal-container" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center backdrop-blur hidden z-50">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-            <h2 class="text-xl font-bold mb-4">CR এর জন্য সম্মান</h2>
-            <div class="text-center mb-4">
-                <img id="modal-image" src="WhatsApp Image 2025-09-10 at 22.00.39_48a5347c.jpg" alt="Placeholder Image" class="mx-auto w-[300px] h-[310px] rounded-md">
-            </div>
-            <p class="text-center text-lg font-semibold mb-4">আপনি CR কে  <span id="final-score" class="text-red-600">0</span> বার সম্মান প্রদর্শন করেছেন।</p>
-            <div class="flex justify-center">
-                <button id="close-modal-button" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Close</button>
-            </div>
-        </div>
-    </div>
-`;
-document.body.insertAdjacentHTML('beforeend', modalHTML);
+loginBtn.addEventListener("click", () => {
+    const name = usernameInput.value.trim();
+    const pass = passwordInput.value;
 
+    if (name && pass === correctPassword) {
+        loginPage.classList.add("hidden");
+        gamePage.classList.remove("hidden");
+        playerName.innerText = name;
+        loginError.classList.add("hidden");
+    } else {
+        loginError.classList.remove("hidden");
+    }
+});
+
+// ----- Game -----
+const mairIcon = document.getElementById("mair-icon");
+const stickerContainer = document.getElementById("sticker-container");
+const scoreElements = document.querySelectorAll(".score-count");
+const doneButton = document.getElementById("done-btn");
 const modalContainer = document.getElementById("modal-container");
 const closeModalButton = document.getElementById("close-modal-button");
 const finalScoreSpan = document.getElementById("final-score");
+const restartButton = document.getElementById("restart-button");
 
+let score = 0;
 
-// Existing functionality for the mair-icon click
-mairIcon.addEventListener("click", function(event) {
-    // Increment the score and sticker count
-    stickerCount++;
-    scoreElements.forEach(function(element) {
-        element.innerText = stickerCount;
+mairIcon.addEventListener("click", () => {
+    score++;
+    scoreElements.forEach(el => {
+        el.innerText = score;
+        el.style.transform = "scale(1.3)";
+        setTimeout(() => el.style.transform = "scale(1)", 200);
     });
-
-    // Create and animate the shoe sticker with count
-    createShoeStickerWithCount(stickerCount);
+    addSticker();
 });
 
-function createShoeStickerWithCount(count) {
-    const stickerWrapper = document.createElement("div");
-    stickerWrapper.className = "absolute transition-all duration-500 ease-out transform";
-    stickerWrapper.style.opacity = "0";
+// ----- Animated sticker with number at random position -----
+function addSticker() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "absolute flex items-center justify-center";
+    wrapper.style.opacity = "0";
 
-    const shoeSticker = document.createElement("img");
-    shoeSticker.src = "juta.png"; 
-    shoeSticker.style.width = "100px";
-    shoeSticker.style.height = "auto";
-
-    const countText = document.createElement("span");
-    countText.innerText = count;
-    countText.className = "absolute font-bold text-3xl drop-shadow-lg z-10";
-
-    const plusIcon = document.createElement("span");
-    plusIcon.innerText = "";
-    plusIcon.className = "absolute text-green-500 font-bold text-2xl drop-shadow-lg z-10";
-
-    // Position of the entire sticker wrapper
-    const horizontalPosition = 50; // 50 is center
-    const verticalPosition = 50; // 50 is center
-    const stickerSize = 80;
-    const offset = stickerSize / 2;
-
-    stickerWrapper.style.left = `calc(${horizontalPosition}% - ${offset}px)`;
-    stickerWrapper.style.top = `calc(${verticalPosition}% - ${offset}px)`;
-
-    // Positioning the count and plus icon inside the wrapper
-    // The following values are manually adjusted for better visual placement
-    countText.style.top = `45%`;
-    countText.style.left = `45%`;
+    // Random position within the container (10% to 80%)
+    const left = Math.random() * 70 + 10;
+    const top = Math.random() * 70 + 10;
+    wrapper.style.left = left + "%";
+    wrapper.style.top = top + "%";
+    wrapper.style.transform = "translate(-50%, -50%) scale(0.5)";
     
-    plusIcon.style.top = `30%`;
-    plusIcon.style.left = `70%`;
-    
-    // Initial scale and rotation for animation
-    stickerWrapper.style.transform = `scale(0.5)`;
+    // Shoe image
+    const img = document.createElement("img");
+    img.src = "juta.png"; // Make sure path is correct
+    img.style.width = "60px";
+    img.style.transition = "transform 0.5s ease, opacity 0.5s ease";
 
-    stickerWrapper.appendChild(shoeSticker);
-    stickerWrapper.appendChild(countText);
-    stickerWrapper.appendChild(plusIcon);
-    stickerContainer.appendChild(stickerWrapper);
+    // Number overlay
+    const number = document.createElement("span");
+    number.innerText = score;
+    number.className = "text-red-700 font-bold absolute";
+    number.style.top = "50%";
+    number.style.left = "50%";
+    number.style.transform = "translate(-50%, -50%)";
+    number.style.transition = "transform 0.5s ease, opacity 0.5s ease";
 
-    // Animate the sticker
+    wrapper.appendChild(img);
+    wrapper.appendChild(number);
+    stickerContainer.appendChild(wrapper);
+
+    // Animate in
     setTimeout(() => {
-        stickerWrapper.style.opacity = "1";
-        stickerWrapper.style.transform = `scale(1) rotate(0deg)`;
+        wrapper.style.opacity = "1";
+        wrapper.style.transform = "translate(-50%, -50%) scale(1.5)";
     }, 10);
 
-    // Fade out and remove the sticker
+    // Animate fade out and remove
     setTimeout(() => {
-        stickerWrapper.style.opacity = "0";
-        setTimeout(() => {
-            stickerWrapper.remove();
-        }, 500); // Wait for fade-out transition
-    }, 1000);
+        wrapper.style.opacity = "0";
+        wrapper.style.transform = "translate(-50%, -50%) scale(0.5)";
+        setTimeout(() => wrapper.remove(), 500);
+    }, 800);
 }
 
-// New functionality for the "DONE" button click
-doneButton.addEventListener("click", function() {
-    let finalScore = document.querySelector(".score-count").innerText;
-    finalScoreSpan.innerText = finalScore;
+// ----- DONE & modal -----
+doneButton.addEventListener("click", () => {
+    finalScoreSpan.innerText = score;
     modalContainer.classList.remove("hidden");
 });
 
-// New functionality for the "Close" button click
-closeModalButton.addEventListener("click", function() {
+closeModalButton.addEventListener("click", () => {
+    modalContainer.classList.add("hidden");
+});
+
+restartButton.addEventListener("click", () => {
+    score = 0;
+    scoreElements.forEach(el => el.innerText = 0);
+    stickerContainer.innerHTML = "";
     modalContainer.classList.add("hidden");
 });

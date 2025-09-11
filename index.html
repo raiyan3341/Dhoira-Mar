@@ -1,57 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CR ER PU**ki MAR</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        /* Optional: Add a simple transition for a smoother visual effect */
-        .score-count {
-            transition: transform 0.2s ease-in-out;
-        }
-        .backdrop-blur {
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px); /* For Safari support */
-        }
-        
-    </style>
-</head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CR Game</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+    .score-count { transition: transform 0.2s ease-in-out; }
+    .backdrop-blur { backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+</style>
+</head>
 <body class="bg-[#57575f]">
-    <div class="w-[375px] md:w-[1140px] mx-auto mt-4 py-5 border border-zinc-200 rounded-2xl  bg-[rgba(215,255,253,0.95)] shadow-2xl">
 
-        <div class="w-[160px] h-[45px] flex gap-1 bg-[#75f84171] text-xl font-bold rounded-2xl items-center justify-center ml-48 md:ml-230">
-            <p class="">Total Score:</p>
-            <p class="score-count text-red-600">0</p>
-        </div>
+<!-- ================= LOGIN PAGE ================= -->
+<div id="login-page" class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <h1 class="text-2xl font-bold mb-6 text-blue-700">Welcome! Please Login to the Game</h1>
+    
+    <input id="username" type="text" placeholder="Enter your name" 
+           class="mb-3 px-4 py-2 border rounded-lg w-64">
 
-        <div class="text-center font-bold text-blue-700 text-base m-4 md:text-xl">
-            <h1>সম্মানিত ছাত্রবীন্দু, আমাদের section CR এর জন্য আমরা কিছু সম্মান প্রদর্শন করতে চাই:</h1>
-        </div>
+    <input id="password" type="password" placeholder="Enter your password" 
+           class="mb-3 px-4 py-2 border rounded-lg w-64">
 
-        <div>
-        <h1 class="text-center font-bold text-green-800 text-sm m-4 md:text-xl"> নিচে সার্কেল অপশনে click/Tap করে করে আমরা তাকে সম্মান প্রদর্শন করতে চাই:</h1>
-       </div>
-
-
-       <div class="relative">
-    <img id="main-image" class="w-[190px] h-[200px] ml-25 md:w-[300px] md:h-[250px] md:ml-96" src="WhatsApp Image 2025-09-10 at 22.00.39_b8ddfa7d.jpg" alt="">
-    <div id="sticker-container" class="absolute inset-0 pointer-events-none"></div>
+    <button id="login-btn" 
+         class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+      Login
+    </button>
+    <p id="login-error" class="text-red-600 font-bold mt-3 hidden"> Wrong Username or Password</p>
 </div>
 
-       <div class="flex gap-1 items-center ml-19 rounded-xl w-60 h-8 text-base mt-4 md:ml-101 bg-blue-200">
-        <p class="text-black font-bold ml-7">CR কে জুতা মারা হচ্ছে: <span class="score-count text-red-600">0</span> </p>
-       </div>
+<!-- ================= GAME PAGE ================= -->
+<div id="game-page" class="hidden w-[375px] md:w-[1140px] mx-auto mt-4 py-5 border border-zinc-200 rounded-2xl  bg-[rgba(215,255,253,0.95)] shadow-2xl">
 
-       <div id="mair-icon" class="w-35 h-35 ml-31 mt-5 border border-green-500 shadow-2xl rounded-full bg-green-200 cursor-pointer hover:bg-green-300 active:scale-95 md:ml-115 ">
-        <p class="text-center text-cyan-800 font-bold mt-9 justify-center"> এক দুই তিন চার...<br> CR রে <span class="text-red-700">জুতা </span> মার Tap/Click</p>
 
-       </div>
-
-       <div>
-        <button class="w-40 h-8 rounded-xl bg-green-500 shadow-2xl ml-29 mt-5 md:ml-110">DONE</button>
-       </div>
+    <div class="flex ">
+      <div class="w-[140px] h-[45px] flex gap-1 bg-[#399efc71] text-xl font-bold rounded-2xl items-center justify-center ml-5">
+        <p>Player:</p>
+        <p id="player-name" class="text-red-600 font-bold"></p>
+      </div>
+     <div class="w-[155px] h-[45px] flex gap-1 bg-[#75f84171] text-xl font-bold rounded-2xl items-center justify-center ml-12 md:ml-200">
+       
+        <p>Total Score:</p>
+        <p class="score-count text-red-600">0</p>
+     </div>
     </div>
+
+
+    <div class="text-center font-bold text-blue-700 text-base m-4 md:text-xl">
+        <h1>সম্মানিত ছাত্রবীন্দু, আমাদের section CR এর জন্য আমরা কিছু সম্মান প্রদর্শন করতে চাই:</h1>
+    </div>
+
+    <div>
+        <h1 class="text-center font-bold text-green-800 text-sm m-4 md:text-xl">
+        নিচে সার্কেল অপশনে click/Tap করে করে আমরা তাকে সম্মান প্রদর্শন করতে চাই:
+        </h1>
+    </div>
+
+    <div class="relative">
+        <img id="main-image" class="w-[190px] h-[200px] ml-25 md:w-[300px] md:h-[250px] md:ml-96" src="WhatsApp Image 2025-09-10 at 22.00.39_b8ddfa7d.jpg" alt="">
+        <div id="sticker-container" class="absolute inset-0 pointer-events-none"></div>
+    </div>
+
+    <div class="flex gap-1 items-center ml-19 rounded-xl w-60 h-8 text-base mt-4 md:ml-101 bg-blue-200">
+        <p class="text-black font-bold ml-7">CR কে জুতা মারা হচ্ছে: <span class="score-count text-red-600">0</span></p>
+    </div>
+
+    <div id="mair-icon" class="w-35 h-35 ml-31 mt-5 border border-green-500 shadow-2xl rounded-full bg-green-200 cursor-pointer hover:bg-green-300 active:scale-95 md:ml-115">
+        <p class="text-center text-cyan-800 font-bold mt-9 justify-center">
+            এক দুই তিন চার...<br> CR রে <span class="text-red-700">জুতা </span> মার Tap/Click
+        </p>
+    </div>
+
+    <div>
+        <button id="done-btn" class="w-40 h-8 rounded-xl bg-green-500 shadow-2xl ml-29 mt-5 md:ml-110">DONE</button>
+    </div>
+</div>
+
+<!-- ================= MODAL ================= -->
+<div id="modal-container" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center backdrop-blur hidden z-50">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4">CR এর জন্য সম্মান</h2>
+        <div class="text-center mb-4">
+            <img src="WhatsApp Image 2025-09-10 at 22.00.39_48a5347c.jpg" class="mx-auto w-[300px] h-[310px] rounded-md">
+        </div>
+        <p class="text-center text-lg font-semibold mb-4">
+            আপনি CR কে <span id="final-score" class="text-red-600">0</span> বার সম্মান প্রদর্শন করেছেন।
+        </p>
+        <div class="flex justify-center gap-3">
+            <button id="close-modal-button" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Close</button>
+            <button id="restart-button" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Restart</button>
+        </div>
+    </div>
+</div>
 
     <script src="script.js"></script>
 </body>

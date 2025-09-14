@@ -107,3 +107,19 @@ restartButton.addEventListener("click", () => {
     stickerContainer.innerHTML = "";
     modalContainer.classList.add("hidden");
 });
+
+document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault(); return false;
+      }
+      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+        e.preventDefault(); return false;
+      }
+      if (e.ctrlKey && (e.key === 'U' || e.key === 'S')) {
+        e.preventDefault(); return false;
+      }
+    });
